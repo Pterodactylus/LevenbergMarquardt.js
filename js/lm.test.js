@@ -15,10 +15,9 @@ describe('LevenbergMarquardtSolver Tests', () => {
       vars[0] + 2 * vars[1] - 5,
       3 * vars[0] + 4 * vars[1] - 11
     ];
-    const solver = new MultiFunctionSolver();
     const initialGuess = [0, 0];
-    const solution = solver.solve(equations, initialGuess);
-    expectToBeCloseToArray(equations(solution.x), [0, 0]);
+    const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess);
+    expectToBeCloseToArray(equations(solution), [0, 0]);
   });
 
   test('It solves a simple nonlinear system', () => {
@@ -26,10 +25,9 @@ describe('LevenbergMarquardtSolver Tests', () => {
       vars[0]**2 + vars[1]**2 - 4,
       vars[0]*vars[0] + vars[1] - 3  // Example modified for clear readability
     ];
-    const solver = new MultiFunctionSolver();
     const initialGuess = [1, 1];
-    const solution = solver.solve(equations, initialGuess);
-    expectToBeCloseToArray(equations(solution.x), [0, 0]);
+    const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess);
+    expectToBeCloseToArray(equations(solution), [0, 0]);
   });
 
   test('It returns null for inconsistent systems', () => {
@@ -37,10 +35,9 @@ describe('LevenbergMarquardtSolver Tests', () => {
       2 * vars[0] + 3 * vars[1] - 10,
       2 * vars[0] + 3 * vars[1] - 12  // Impossible scenario given a = 10 != 12
     ];
-    const solver = new MultiFunctionSolver();
     const initialGuess = [0, 0];
-    const solution = solver.solve(equations, initialGuess);
-    expect(solution.status).toEqual("Max Iterations Reached");
+    const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess, maxIterations = 200);
+    expect(status).toEqual("Max Iterations Reached");
   });
 
   test('Solver returns array with the correct size of variables', () => {
@@ -49,10 +46,9 @@ describe('LevenbergMarquardtSolver Tests', () => {
       vars[0] - vars[1] - 2*vars[2] - 1,
       2*vars[1] - 3*vars[2] - 9
     ];
-    const solver = new MultiFunctionSolver();
     const initialGuess = [0, 0, 0];
-    const solution = solver.solve(equations, initialGuess);
-    expectToBeCloseToArray(equations(solution.x), [0, 0, 0]);
+    const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess);
+    expectToBeCloseToArray(equations(solution), [0, 0, 0]);
   });
 
 });

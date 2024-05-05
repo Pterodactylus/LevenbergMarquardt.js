@@ -1,12 +1,8 @@
 class LevenbergMarquardtSolver {
   
-    solve(f, x0) {
-      let maxIterations = 100;
-      let tolerance = 1e-8;
+    static solve(f, initialGuess, maxIterations = 100, tolerance = 1e-8, lambda = 0.001, epsilon = 1e-8) {
       let iterationData = []; 
-      let lambda = 0.001;
-      let epsilon = 1e-8;
-      let x = x0;
+      let x = initialGuess;
       let iter = 0;
       let stop = false;
   
@@ -57,18 +53,18 @@ class LevenbergMarquardtSolver {
         status = "Max Iterations Reached";
       }
   
-      return {x: x, status: status, iterationData: iterationData};
+      return {solution: x, status: status, iterationData: iterationData};
     }
   
-    norm(vec) {
+    static norm(vec) {
       return Math.sqrt(vec.reduce((acc, val) => acc + val * val, 0));
     }
   
-    transpose(matrix) {
+    static transpose(matrix) {
       return matrix[0].map((_, i) => matrix.map(row => row[i]));
     }
   
-    multiply(A, B) {
+    static multiply(A, B) {
       if (B[0].length === undefined) {
         // B is a vector
         return A.map(row => row.reduce((acc, val, i) => acc + val * B[i], 0));
@@ -82,11 +78,11 @@ class LevenbergMarquardtSolver {
       }
     }
   
-    addLambdaToDiagonal(mat, lambda) {
+    static addLambdaToDiagonal(mat, lambda) {
       return mat.map((row, i) => row.map((val, j) => i === j ? val + lambda : val));
     }
   
-    solveLinearSystem(A, b) {
+    static solveLinearSystem(A, b) {
       // Implementing a simple Gaussian elimination here for demonstration purposes.
       // Note: Not the most stable or efficient method for large systems.
       const n = A.length;
@@ -121,15 +117,15 @@ class LevenbergMarquardtSolver {
       return x;
     }
   
-    negate(vec) {
+    static negate(vec) {
       return vec.map(v => -v);
     }
   
-    add(a, b) {
+    static add(a, b) {
       return a.map((v, i) => v + b[i]);
     }
 
-    numericalJacobian(f, x, epsilon, fx) {
+    static numericalJacobian(f, x, epsilon, fx) {
       let jacobian = [];
         
       //if (constraintFunc) {
