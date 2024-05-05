@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Combined 3D Visualization with Plotly.js</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="lm.js"></script>
+</head>
+<body>
+
+<div id="combinedPlot" style="width: 800px; height: 600px;"></div>
+
+<script>
+    // Data for 3D Scatter (representing the line chart in a 3D format)
+    //const iter = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    //const fNorm = [3, 3, 3, 3, 1.682763522367352, 0.3160487989924193, 0.00616001239234269, 0.0000027751707191603792, 1.3991977785363838e-11];
+    //const xCoords = [1, 1, 1, 1, 1.176470589147818, 0.6120191709783461, 0.599549375302035, 0.5995281496062017, 0.5995282992838651];
+    //const yCoords = [1, 1, 1, 1, 1.7058823556624063, 1.7029528779641305, 1.6687104762232532, 1.6679783312915795, 1.6679779773227792];
+
+    const fNorm = solution[1].map(point => point.fNorm);
+    const xCoords = solution[1].map(point => point.x[0]);
+    const yCoords = solution[1].map(point => point.x[1]);
+
+    function make2DSurfaceArr(startX, stopX, pointsX, startY, stopY, pointsY, fNorm) {
+        let arrX = [];
+        let arrY = [];
+        let arrZ = [];
+        let stepX = (stopX - startX) / (pointsX - 1);
+        let stepY = (stopY- startY) / (pointsY - 1);
+        for (let i = 0; i < pointsX; i++) {
+            let x = startX + (stepX* i);
+            arrX.push(x);
+        }
+        for (let j = 0; j < pointsY; j++) {
+            let y = startY + (stepY * j);
+            arrY.push(y);
+        }
+        for (let j = 0; j < pointsY; j++) {
+            arrZ.push([])
+            for (let i = 0; i < pointsX; i++) {
+                let z = fNorm([arrX[i], arrY[j]])
+                arrZ[arrZ.length-1].push(z);
+                //console.log("x[", i,"]=", arrX[i], "y[", j,"]=", arrY[j], "z[", j,", ", i,"]=", arrZ[j][i])
+            }
+        }
+        return {x: arrX, y: arrY, fNorm: arrZ};
+    }
+
+    let minx = Math.min(...xCoords);
+    let maxx = Math.max(...xCoords);
+    let miny = Math.min(...yCoords);
+    let maxy = Math.max(...yCoords);
+    let d = 0.2;
+    let rangeX = (maxx - minx)*d;
+    let rangeY = (maxy - miny)*d;
+    let arr = make2DSurfaceArr(minx-rangeX, maxx+rangeX, 90, miny-rangeY, maxy+rangeY, 100, fn);
+
+    const scatter3d = {
+        x: xCoords,
+        y: yCoords,
+        z: fNorm,
+        mode: 'lines+markers',
+        marker: {
+            size: 4,
+            color: 'red'
+        },
+        type: 'scatter3d',
+        name: 'fNorm vs Iteration (3D Line)'
+    };
+
+    // Data for Surface Plot
+    const traceSurface = {
+        x: arr.x,
+        y: arr.y,
+        z: arr.fNorm,
+        type: 'surface',
+        contours: {
+            z: {
+                show: true,
+                usecolormap: true,
+                highlightcolor: "#42f462",
+                project: { z: true }
+            }
+        }
+    };
+
+    const layout = {
+        title: 'Overlay of 3D Line and Surface Plot',
+        autosize: false,
+        width: 1200,
+        height: 800,
+        margin: {
+            l: 50,
+            r: 50,
+            b: 65,
+            t: 90
+        }
+    };
+
+    Plotly.newPlot('combinedPlot', [traceSurface, scatter3d], layout);
+
+</script>
+
+</body>
+</html>

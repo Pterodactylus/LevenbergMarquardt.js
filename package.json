@@ -1,0 +1,15 @@
+{
+  "name": "numsolve",
+  "version": "1.0.0",
+  "description": "This README provides examples of how to use a multi-function solver. Each example outlines different scenarios and mathematical problems being solved.",
+  "main": "lm.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
