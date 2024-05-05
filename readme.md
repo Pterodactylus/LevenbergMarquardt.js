@@ -1,6 +1,6 @@
-# Multi-Function Solver Examples for GitHub README.md
+# Levenberg Marquardt Solver Examples
 
-This README provides examples of how to use a multi-function solver. Each example outlines different scenarios and mathematical problems being solved.
+This README provides examples of how to use a non-linear least squares multi-function solver. Each example outlines different scenarios and mathematical problems being solved.
 
 # Example 1: System of Linear Equations
 
