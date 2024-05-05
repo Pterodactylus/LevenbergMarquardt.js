@@ -30,6 +30,16 @@ describe('LevenbergMarquardtSolver Tests', () => {
     expectToBeCloseToArray(equations(solution), [0, 0]);
   });
 
+  test('It solves a second nonlinear system', () => {
+    const equations = (vars) => [
+      vars[0]**2 + vars[1]**2 - 4,
+      Math.exp(vars[0]) + vars[1] - 1
+    ];
+    const initialGuess = [1, 1];
+    const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess);
+    expectToBeCloseToArray(equations(solution), [0, 0]);
+  });
+
   test('It returns null for inconsistent systems', () => {
     const equations = (vars) => [
       2 * vars[0] + 3 * vars[1] - 10,
@@ -38,6 +48,17 @@ describe('LevenbergMarquardtSolver Tests', () => {
     const initialGuess = [0, 0];
     const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess, maxIterations = 200);
     expect(status).toEqual("Max Iterations Reached");
+  });
+
+  test('It does data fitting', () => {
+    const xData = [0, 1, 2, 3, 4];
+    const yData = [1, 2.1, 3.9, 8, 15.9];
+
+    const fittingFunction = (params) => xData.map((x, idx) => params[0] * x**2 + params[1] * x + params[2] - yData[idx]);
+
+    const initialGuessFitting = [1, 1, 1];
+    const {solution, status, iterationData} = MultiFunctionSolver.solve(fittingFunction, initialGuessFitting);
+    expect(MultiFunctionSolver.norm(fittingFunction(solution))).toBeLessThan(1);
   });
 
   test('Solver returns array with the correct size of variables', () => {
