@@ -22,8 +22,7 @@ const equations = (vars) => [
 ];
 
 const initialGuess = [0, 0];
-const solver = new MultiFunctionSolver();
-const solution = solver.solve(equations, initialGuess);
+const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess);
 console.log('Solution:', solution);
 ```
 
@@ -49,9 +48,8 @@ const nonlinearEquations = (vars) => [
 ];
 
 const initialGuessNonlinear = [1, 1];
-const solverNonlinear = new MultiFunctionSolver();
-const solutionNonlinear = solverNonlinear.solve(nonlinearEquations, initialGuessNonlinear);
-console.log('Nonlinear Solution:', solutionNonlinear);
+const {solution, status, iterationData} = MultiFunctionSolver.solve(nonlinearEquations, initialGuessNonlinear);
+console.log('Nonlinear Solution:', solution);
 ```
 
 # Example 3: Fitting Data
@@ -65,7 +63,6 @@ const yData = [1, 2.1, 3.9, 8, 15.9];
 const fittingFunction = (params) => xData.map((x, idx) => params[0] * x**2 + params[1] * x + params[2] - yData[idx]);
 
 const initialGuessFitting = [1, 1, 1];
-const solverFitting = new MultiFunctionSolver();
-const solutionFitting = solverFitting.solve(fittingFunction, initialGuessFitting);
-console.log('Fitting Parameters:', solutionFitting);
+const {solution, status, iterationData} = MultiFunctionSolver.solve(fittingFunction, initialGuessFitting);
+console.log('Fitting Parameters:', solution);
 ```
