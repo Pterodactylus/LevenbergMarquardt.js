@@ -1,10 +1,11 @@
 {
-  "name": "levenbergmarquardt.js",
-  "version": "1.0.0",
+  "name": "@Pterodactylus/levenbergmarquardt.js",
+  "version": "1.0.2",
   "description": "This README provides examples of how to use a multi-function solver. Each example outlines different scenarios and mathematical problems being solved.",
   "main": "lm.js",
-  "publishConfig": {
-    "@Pterodactylus:registry": "https://npm.pkg.github.com"
+  "repository": { 
+    "type": "git", 
+    "url": "https://github.com/Pterodactylus/levenbergmarquardt.js.git" 
   },
   "scripts": {
     "test": "jest --coverage"
