@@ -1,8 +1,11 @@
 {
-  "name": "numsolve",
+  "name": "levenbergmarquardt.js",
   "version": "1.0.0",
   "description": "This README provides examples of how to use a multi-function solver. Each example outlines different scenarios and mathematical problems being solved.",
   "main": "lm.js",
+  "publishConfig": {
+    "@Pterodactylus:registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "test": "jest --coverage"
   },
