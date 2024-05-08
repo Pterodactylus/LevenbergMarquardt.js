@@ -1,6 +1,7 @@
 # Getting Started
 ```bash
-npm install @pterodactylus/levenbergmarquardt.js@1.0.2
+npm config set registry https://npm.pkg.github.com
+npm install @pterodactylus/levenbergmarquardt.js@1.0.3
 ```
 
 ```html
