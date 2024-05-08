@@ -1,4 +1,4 @@
-class LevenbergMarquardtSolver {
+export default class LevenbergMarquardtSolver {
   
     static solve(f, initialGuess, maxIterations = 100, tolerance = 1e-8, lambda = 0.001, epsilon = 1e-8) {
       let iterationData = []; 
@@ -151,5 +151,3 @@ class LevenbergMarquardtSolver {
       return this.transpose(jacobian);
     }
 }
-
-module.exports = LevenbergMarquardtSolver

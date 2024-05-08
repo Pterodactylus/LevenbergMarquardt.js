@@ -1,19 +1,23 @@
 {
   "name": "@Pterodactylus/levenbergmarquardt.js",
   "version": "1.0.2",
-  "description": "This README provides examples of how to use a multi-function solver. Each example outlines different scenarios and mathematical problems being solved.",
+  "description": "A multi-function solver. Each example outlines different scenarios and mathematical problems being solved.",
   "main": "lm.js",
+  "type": "module",
   "repository": { 
     "type": "git", 
     "url": "https://github.com/Pterodactylus/levenbergmarquardt.js.git" 
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
   },
-  "keywords": [],
+  "keywords": ["Nonlinear", "solver", "system", "equations"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "jest": {
+    "transform": {}
   }
 }

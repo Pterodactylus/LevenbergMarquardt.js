@@ -1,3 +1,12 @@
+# Getting Started
+```bash
+npm install @pterodactylus/levenbergmarquardt.js@1.0.2
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/pterodactylus/levenbergmarquardt.js@latest/js/lm.min.js"></script>
+```
+
 # Levenberg Marquardt Solver Examples
 
 This README provides examples of how to use a non-linear least squares multi-function solver. Each example outlines different scenarios and mathematical problems being solved.
