@@ -1,9 +1,12 @@
 # Getting Started
+
+Install via npm:
 ```bash
 npm config set registry https://registry.npmjs.org/
 npm i levenbergmarquardt.js
 ```
 
+Or import via ES6 CDN:
 ```html
 <script type="module">
   import LevenbergMarquardtSolver from "https://cdn.jsdelivr.net/gh/pterodactylus/levenbergmarquardt.js@latest/js/lm.min.js"
