@@ -1,10 +1,14 @@
 # Getting Started
 ```bash
-npm install levenbergmarquardt.js@1.0.3
+npm config set registry https://registry.npmjs.org/
+npm i levenbergmarquardt.js
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/pterodactylus/levenbergmarquardt.js@latest/js/lm.min.js"></script>
+<script type="module">
+  import LevenbergMarquardtSolver from "https://cdn.jsdelivr.net/gh/pterodactylus/levenbergmarquardt.js@latest/js/lm.min.js"
+  //Your code here....
+</script>
 ```
 
 # Levenberg Marquardt Solver Examples
@@ -31,7 +35,7 @@ const equations = (vars) => [
 ];
 
 const initialGuess = [0, 0];
-const {solution, status, iterationData} = MultiFunctionSolver.solve(equations, initialGuess);
+const {solution, status, iterationData} = LevenbergMarquardtSolver.solve(equations, initialGuess);
 console.log('Solution:', solution);
 ```
 
@@ -57,7 +61,7 @@ const nonlinearEquations = (vars) => [
 ];
 
 const initialGuessNonlinear = [1, 1];
-const {solution, status, iterationData} = MultiFunctionSolver.solve(nonlinearEquations, initialGuessNonlinear);
+const {solution, status, iterationData} = LevenbergMarquardtSolver.solve(nonlinearEquations, initialGuessNonlinear);
 console.log('Nonlinear Solution:', solution);
 ```
 
@@ -72,6 +76,6 @@ const yData = [1, 2.1, 3.9, 8, 15.9];
 const fittingFunction = (params) => xData.map((x, idx) => params[0] * x**2 + params[1] * x + params[2] - yData[idx]);
 
 const initialGuessFitting = [1, 1, 1];
-const {solution, status, iterationData} = MultiFunctionSolver.solve(fittingFunction, initialGuessFitting);
+const {solution, status, iterationData} = LevenbergMarquardtSolver.solve(fittingFunction, initialGuessFitting);
 console.log('Fitting Parameters:', solution);
 ```
