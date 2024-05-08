@@ -1,6 +1,6 @@
 {
   "name": "levenbergmarquardt.js",
-  "version": "1.0.4",
+  "version": "1.0.9",
   "description": "A multi-function solver. Each example outlines different scenarios and mathematical problems being solved.",
   "main": "lm.js",
   "type": "module",
